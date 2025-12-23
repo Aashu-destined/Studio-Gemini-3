@@ -1,0 +1,5 @@
+{
+  "name": "Gemini Image Studio",
+  "description": "A high-performance image generation platform utilizing the latest Gemini 2.5 and 3 series models with liquid glassmorphism UI.",
+  "requestFramePermissions": []
+}
