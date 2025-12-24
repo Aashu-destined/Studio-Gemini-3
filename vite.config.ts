@@ -5,11 +5,11 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     console.log('Build Mode:', mode);
-    console.log('Base Path:', '/gemini-image-studio/');
+    console.log('Base Path:', '/Studio-Gemini-3/');
     console.log('API Key present:', !!(env.GEMINI_API_KEY || env.VITE_API_KEY));
     
     return {
-      base: '/gemini-image-studio/',
+      base: '/Studio-Gemini-3/',
       server: {
         port: 3000,
         host: '0.0.0.0',
