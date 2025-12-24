@@ -43,9 +43,11 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<GeneratedImage | null>(null);
   const [activeContext, setActiveContext] = useState<GeneratedImage | null>(null);
+  const [showApiKeyModal, setShowApiKeyModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [config, setConfig] = useState<GenerationConfig>({
+    apiKey: localStorage.getItem('gemini_api_key') || undefined,
     model: GenerationModel.PRO_IMAGE,
     prompt: '',
     aspectRatio: '1:1',
@@ -62,16 +64,20 @@ export default function App() {
     },
   });
 
-  const handleOpenKeySelector = async () => {
-    try {
-      // @ts-ignore
-      if (window.aistudio?.openSelectKey) {
-        // @ts-ignore
-        await window.aistudio.openSelectKey();
-      }
-    } catch (err) {
-      console.error("Failed to open key selector", err);
+  const handleOpenKeySelector = () => {
+    setShowApiKeyModal(true);
+  };
+
+  const handleSaveApiKey = (key: string) => {
+    if (!key.trim()) {
+      localStorage.removeItem('gemini_api_key');
+      setConfig(prev => ({ ...prev, apiKey: undefined }));
+    } else {
+      localStorage.setItem('gemini_api_key', key);
+      setConfig(prev => ({ ...prev, apiKey: key }));
     }
+    setShowApiKeyModal(false);
+    setError(null);
   };
 
   const handleReferenceUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +88,7 @@ export default function App() {
     const filesToProcess = Array.from(files).slice(0, remainingSlots);
 
     const newRefs: ReferenceImage[] = await Promise.all(
-      filesToProcess.map(file => new Promise<ReferenceImage>((resolve) => {
+      filesToProcess.map((file: File) => new Promise<ReferenceImage>((resolve) => {
         const reader = new FileReader();
         reader.onloadend = () => {
           const base64String = (reader.result as string).split(',')[1];
@@ -124,14 +130,6 @@ export default function App() {
     if (!isVariation && !promptToUse.trim()) {
       setError("Enter a prompt to create your artwork.");
       return;
-    }
-
-    if (config.model === GenerationModel.PRO_IMAGE) {
-      // @ts-ignore
-      const hasKey = await window.aistudio?.hasSelectedApiKey();
-      if (!hasKey) {
-        await handleOpenKeySelector();
-      }
     }
 
     setIsGenerating(true);
@@ -498,6 +496,47 @@ export default function App() {
           )}
         </section>
       </main>
+
+      {/* API Key Modal */}
+      {showApiKeyModal && (
+        <div className="fixed inset-0 z-[130] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300" onClick={() => setShowApiKeyModal(false)}>
+          <div className="bg-[#0f172a] border border-white/10 p-8 rounded-3xl max-w-md w-full shadow-2xl relative" onClick={e => e.stopPropagation()}>
+            <h3 className="text-xl font-black text-white mb-4 uppercase tracking-widest">API Key Configuration</h3>
+            <p className="text-slate-400 text-sm mb-6">
+              Enter your Google Gemini API key to enable generation.
+              <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-indigo-400 hover:text-indigo-300 ml-1">Get a key here</a>.
+            </p>
+            <input
+              type="password"
+              placeholder="AIza..."
+              defaultValue={config.apiKey}
+              className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white mb-6 focus:outline-none focus:border-indigo-500 transition-colors font-mono text-sm"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSaveApiKey(e.currentTarget.value);
+                }
+              }}
+            />
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowApiKeyModal(false)}
+                className="px-4 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+              >
+                CANCEL
+              </button>
+              <button
+                onClick={(e) => {
+                  const input = e.currentTarget.parentElement?.previousElementSibling as HTMLInputElement;
+                  handleSaveApiKey(input.value);
+                }}
+                className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-black tracking-widest transition-all"
+              >
+                SAVE KEY
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Symmetric Full Image Modal */}
       {selectedImage && (

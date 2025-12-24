@@ -1,0 +1,96 @@
+{
+  "scene": {
+    "type": "bedroom_interior",
+    "lighting": "natural_daylight",
+    "atmosphere": "casual, cozy, domestic"
+  },
+  "subject": {
+    "pose": {
+      "position": "lying_prone_on_bed",
+      "orientation": "facing_camera",
+      "legs": "knees_bent_upwards, ankles_crossed",
+      "arms": "left_arm_extended_for_selfie",
+      "head": "resting_on_pillow"
+      "cleavage":"flashy cleavage, big boobs, "
+      "boobs":"big bouncy, getting out of cloths"
+  },
+    "expression": {
+      "eyes": "big expressive almond eyes lined with thick kohl (kajal), looking up through lashes, 'who me?' energy",
+      "mouth": "soft pout, natural rose-tinted lips slightly parted",
+      "brows": "dark, well-groomed, thick and arched",
+      "overall": "traditional innocent face but modern devil body, the desi contrast is the point"
+    },
+    "hair": {
+      "color": "jet black",
+      "style": "messy bun with a claw clip, thick loose wavy strands framing the face, volume at the roots"
+    },
+    "body": {
+      "waist": "snatched, narrow",
+      "skin_tone": "glowing golden-olive / wheatish complexion",
+      "ass": "very round curvy, full, fabric of shorts riding up, soft but toned",
+      "thighs": "thick, soft, touching, shorts barely containing them"
+      "Boobs": "large, flashy , appealing"
+    },
+    "face": {
+      "features": "sharp features, small defined nose, tiny black bindi on forehead",
+      "makeup": "glowing skin, smudged kajal in waterline, tinted lip balm, natural flush"
+	"complexion": "fair, rosy_cheeks"
+    }
+    "accessories": {
+    "jewelry": {
+      "nose": "tiny diamond or gold nose stud",
+      "neck": "thin gold chain resting on collarbone",
+      "ears": "small gold hoops or studs"
+    },
+    "headwear": {
+      "type": "none or hair claw clip visible",
+      "details": "matte finish claw clip holding thick hair"
+    },
+	"appearance": {
+      "hair": "long, straight, dark_brown",
+      "expression": "gentle_smile, direct_eye_contact",
+      "complexion": "fair, rosy_cheeks"
+    },
+    "attire": {
+      "type": "Slip dress / Chemise",
+      "color": "{argument name="dress color" default="Vibrant red"}",
+      "material": "Satin or silk finish with a glossy sheen",
+      "details": "Spaghetti straps, V-neckline with scalloped lace trim, lace detailing near the hem, mini length",
+      "accessories": "Small silver pendant necklace, ring on ring finger of left hand"
+    },
+      },
+      "accessories": {
+        "feet": "white_crew_socks"
+      }
+    }
+  },
+  "environment": {
+    "bedding": {
+      "sheets": "white, rumpled",
+      "pillows": "white_with_floral_pattern",
+      "duvet": "white, puffy"
+    },
+    "background_elements": {
+      "windows": {
+        "quantity": 2,
+        "features": "white_frames, horizontal_blinds"
+      },
+      "furniture": {
+        "side_table": {
+          "location": "left_side",
+          "visible_items": [
+            "skincare_products",
+            "pink_mug",
+            "small_potted_plant",
+            "tissues"
+          ]
+        }
+      }
+    }
+  },
+  "composition": {
+    "angle": "high_angle_selfie",
+    "framing": "medium_shot",
+    "focus": "sharp_subject, soft_background"
+  }
+}

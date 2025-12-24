@@ -10,7 +10,13 @@ export const generateImages = async (
   config: GenerationConfig,
   contextImage?: { base64: string; mimeType: string }
 ): Promise<GeneratedImage[]> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const apiKey = config.apiKey || process.env.API_KEY;
+  
+  if (!apiKey) {
+    throw new Error("BYOK_REQUIRED");
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   const results: GeneratedImage[] = [];
 
   try {

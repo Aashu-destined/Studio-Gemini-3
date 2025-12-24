@@ -27,6 +27,7 @@ export interface GeneratedImage {
 }
 
 export interface GenerationConfig {
+  apiKey?: string;
   model: GenerationModel;
   prompt: string;
   aspectRatio: AspectRatio;
